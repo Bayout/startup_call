@@ -1,0 +1,692 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Smart Monitoring HSE - Startup call</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="64f6a18a-e53e-4166-ae2f-e28112e4fcf7" class="page sans"><header><img class="page-cover-image" src="Smart%20Monitoring%20HSE%20-%20Startup%20call%2064f6a18ae53e4166ae2fe28112e4fcf7/_61ae8879-3696-42a5-a74e-2071d7b47641.jpeg" style="object-position:center 50%"/><h1 class="page-title">Smart Monitoring HSE - Startup call</h1><p class="page-description"></p></header><div class="page-body"><p id="65e1c926-cea8-4e39-9558-a0e3143c7607" class="">
+</p><p id="489c2dae-65e5-4dcf-ab3a-9d7b1d954602" class="">One-Liner:</p><p id="c26a73fe-0538-4956-b417-28b3e856980e" class=""><em>Monitoramos a saúde dos funcionários em tempo real com tecnologia avançada, utilizando modelos de machine learning para previsão por IA, permitindo que sua empresa evite incidentes desnecessários.</em></p><p id="95a19fd4-56bb-4dad-b5e3-dc97403ed719" class="">
+</p><p id="c7a2dc8c-2e34-4c7a-b8af-c29200bb42c5" class=""><strong>Necessidade:</strong></p><p id="b6a6050d-2523-4c4c-91d9-a937c552c7b0" class="">Em ambientes de trabalho acelerados de hoje, a saúde e segurança dos funcionários são preocupações primordiais para empresas em todas as indústrias. No entanto, os métodos tradicionais de monitoramento da saúde dos funcionários muitas vezes são reativos e insuficientes. Com o aumento do trabalho remoto e equipes dispersas, há uma crescente necessidade de uma solução abrangente que possa monitorar a saúde dos funcionários em tempo real, independentemente da localização.</p><p id="c381f09e-8519-4070-b8b8-5902393f215d" class="">
+</p><p id="cf2582ac-5502-4f06-a6f6-d881c374dfeb" class="">
+</p><p id="7cbc7893-142b-437a-a3e5-642e3d2e1fb0" class=""><strong>Solução: Sistema de Monitoramento de Saúde de Funcionários com Smartwatch </strong></p><p id="85528ea4-13eb-44fc-a878-64aba3d2438a" class="">
+</p><p id="1b9f88c4-cc95-4a46-8036-80c25054a2fe" class="">Nossa solução utiliza tecnologia de ponta de integrando smartwatches monitorados e alimentando uma grande API de ge<strong>stão</strong> de saúde. Esses smartwatches monitoram continuamente métricas vitais de saúde, como frequência cardíaca, temperatura, <em><strong>saturação</strong></em>, padrões de sono e níveis de atividade, etc. </p><p id="f2c0a860-aacd-4373-8500-de50df7fdea3" class="">Os dados coletados são então analisados em tempo real usando algoritmos, e LLMs avançados para detectar quaisquer anormalidades ou sinais precoces de problemas de saúde, tudo isso encapsulado em um dashboard de monitoramento de saúde continuo; com reports semanais e mensais da saúde do funcionário. Além disso, com o avanço dos LLMs principalmente do grupo europeu John Snow Labs, temos até smart drug detection. Podendo prever acidentes que poderiam acontecer com grande assertividade.</p><p id="5317f3f3-e9ec-48cd-a387-940a3a361e7f" class="">
+</p><figure id="4df2fa6f-657f-47f0-8770-f730af5ca42a" class="image"><a href="Smart%20Monitoring%20HSE%20-%20Startup%20call%2064f6a18ae53e4166ae2fe28112e4fcf7/Screenshot_2024-04-29_at_10.19.01.png"><img style="width:347px" src="Smart%20Monitoring%20HSE%20-%20Startup%20call%2064f6a18ae53e4166ae2fe28112e4fcf7/Screenshot_2024-04-29_at_10.19.01.png"/></a></figure><p id="e45aa116-d31b-4c8d-9b91-619203fa2878" class="">
+</p><p id="301eb7f2-8d9e-4e9b-a35b-972a4e7c4ed2" class=""><strong>Recursos Principais e Benefícios:</strong></p><ol type="1" id="8a04def1-e681-4381-9082-56a7bb11744c" class="numbered-list" start="1"><li><strong>Monitoramento em Tempo Real:</strong> Receba alertas e notificações instantâneas sobre o estado de saúde dos funcionários, permitindo intervenção imediata, se necessário. </li></ol><ol type="1" id="dc23a9c9-5ee7-4ab6-b3b7-642ed2ad79eb" class="numbered-list" start="2"><li><strong>Análise Preditiva:</strong> Utilize análises preditivas baseadas LLMs estabelecidos e uma IA auxiliar  para antecipar possíveis problemas de saúde e tomar medidas proativas para mitigar riscos.</li></ol><ol type="1" id="4dc2c482-c2fb-43aa-a1a9-b4e3c9c9a5bb" class="numbered-list" start="3"><li><strong>Relatórios Abrangentes:</strong> Acesse relatórios detalhados e insights sobre tendências de saúde dos funcionários, permitindo tomada de decisão baseada em dados e alocação de recursos.</li></ol><ol type="1" id="68e895b7-629d-447c-a5be-16acfe44926d" class="numbered-list" start="4"><li><strong>Alertas Personalizáveis:</strong> Personalize alertas e notificações com base em parâmetros de saúde específicos e requisitos organizacionais.</li></ol><ol type="1" id="dd6eb041-2166-4ea1-8ba7-535477a1abfd" class="numbered-list" start="5"><li><strong>Capacidades de Integração:</strong> Integre-se perfeitamente aos sistemas de RH e operacionais existentes para gerenciamento e relatórios simplificados.</li></ol><p id="5d5b20f4-6c16-4aa6-b7a8-58558163d1c5" class="">
+</p><p id="86921d35-c5c4-4154-abae-bb0c92392781" class=""><em>&quot;Imagine um cenário em que um funcionário está sofrendo um princípio de infarto em um guindaste, estando sozinho. Com nossa solução, ele não estaria mais sozinho. Utilizando modelos preditivo de saúde integrados a um módulo de análise em tempo real, chegamos à nossa solução, que é evitar acidentes. O gatilho vai avisar automaticamente no relógio da equipe de enfermagem, que estará pronta para atender o possível acidente. No melhor cenário, medicar, evitar e assumir a responsabilidade pela saúde.”</em></p><p id="45d5ea02-0549-4477-bd45-f8d793877f6b" class="">
+</p><p id="a7f60ec9-3604-48f7-a180-357c5b80127c" class=""><strong>Como Funciona:</strong></p><ol type="1" id="a162b1e6-522c-4ee5-a2eb-71ea023a0d26" class="numbered-list" start="1"><li><strong>Implantação:</strong> Distribua smartwatches alimentados por IA a todos os funcionários como parte do programa de monitoramento de saúde.</li></ol><ol type="1" id="f6807c0d-4aee-4a15-897e-3522ae52ee64" class="numbered-list" start="2"><li><strong>Coleta de Dados:</strong> Smartwatches coletam e transmitem continuamente dados de saúde para uma plataforma centralizada.</li></ol><ol type="1" id="c2312659-f40b-4043-932d-04a11643c57e" class="numbered-list" start="3"><li><strong>Análise:</strong> Algoritmos avançados analisam os dados em tempo real, sinalizando quaisquer anomalias ou tendências preocupantes.</li></ol><ol type="1" id="aaa6a212-7e13-44a0-aa7d-1d0481988939" class="numbered-list" start="4"><li><strong>Alertas e Intervenções:</strong> Alertas instantâneos são enviados para pessoal designado ou supervisores, solicitando intervenções oportunas conforme necessário.</li></ol><ol type="1" id="d6c6bbf7-b97a-4cc9-90f2-3934bfc3cb15" class="numbered-list" start="5"><li><strong>Monitoramento e Otimização:</strong> Monitore métricas de saúde dos funcionários ao longo do tempo, identifique áreas para melhorias e otimize protocolos de saúde e segurança de acordo.</li></ol><p id="acd5de46-1cf2-416e-af60-2cfb6ce5d1c8" class="">
+</p><figure id="6dcd05db-9e44-4ad8-be20-bb3e3b9714f6" class="image"><a href="Smart%20Monitoring%20HSE%20-%20Startup%20call%2064f6a18ae53e4166ae2fe28112e4fcf7/_c4aa8e06-a55e-4d4b-a921-d8d36ab28947.jpeg"><img style="width:708px" src="Smart%20Monitoring%20HSE%20-%20Startup%20call%2064f6a18ae53e4166ae2fe28112e4fcf7/_c4aa8e06-a55e-4d4b-a921-d8d36ab28947.jpeg"/></a></figure><p id="0ca0878c-96eb-4aad-870f-38b7d4dd2b00" class="">
+</p><p id="32382047-a555-4d69-b26b-6ac30bbe10fa" class=""><strong>Projeção Financeira:</strong></p><p id="a32bb796-51be-4444-abcc-bd4f6b94f34c" class="">A adoção do nosso sistema de monitoramento de saúde dos funcionários com smartwatch alimentado por IA (LLMs) pode trazer benefícios financeiros significativos para as empresas:</p><ol type="1" id="df4d424c-09e5-4f6e-a315-3350c6999076" class="numbered-list" start="1"><li><strong>Redução de Custos:</strong> A prevenção de incidentes e acidentes de trabalho pode levar a uma redução nos custos associados, como despesas médicas, sinistros de seguro e responsabilidades legais.</li></ol><ol type="1" id="e67a2c93-f535-48e8-8498-600105536683" class="numbered-list" start="2"><li><strong>Aumento da Produtividade:</strong> Ao manter uma força de trabalho mais saudável e engajada, as empresas podem experimentar um aumento na produtividade e eficiência.</li></ol><ol type="1" id="0d9f0d3e-069a-4870-83a7-01ede9e90272" class="numbered-list" start="3"><li><strong>Mitigação de Riscos:</strong> A minimização do risco de interrupções no local de trabalho devido a doenças ou lesões dos funcionários pode garantir a continuidade das operações e dos negócios.</li></ol><ol type="1" id="a67e609a-434b-4a7a-96d7-8931d547d3ce" class="numbered-list" start="4"><li><strong>Vantagem Competitiva:</strong> As empresas que adotam essa tecnologia podem se diferenciar como líderes em saúde e segurança dos funcionários, melhorando a reputação da marca e atraindo os melhores talentos.</li></ol><p id="3b5dc48c-ba85-4805-b5cd-7a1b703a8da8" class="">
+</p><p id="eb29cf81-5c74-4912-a7fc-1549645517ef" class=""><strong>Projeção ESG:</strong></p><p id="b139ad1d-f231-448c-9368-5aae1f77dc2d" class="">A adoção do nosso sistema de monitoramento de saúde dos funcionários também pode ter um impacto positivo nas métricas ESG (Ambiental, Social e Governança) das empresas:</p><ol type="1" id="527e5f6a-352c-43e8-a809-640df006fe7a" class="numbered-list" start="1"><li><strong>Ambiental:</strong> Ao investir em mão de obra local, as empresas podem reduzir sua pegada de carbono, minimizando a necessidade de deslocamento de trabalhadores de longa distância.</li></ol><ol type="1" id="d8fca308-0665-49fb-9bb2-b82bb1dd5c72" class="numbered-list" start="2"><li><strong>Social:</strong> A contratação de trabalhadores locais investe diretamente na comunidade, gerando empregos e fortalecendo a economia local. Além disso, a criação de um ambiente de trabalho diversificado e inclusivo pode melhorar a qualidade de vida dos indivíduos envolvidos e contribuir para um ambiente de trabalho mais produtivo e positivo.</li></ol><ol type="1" id="59018438-11c0-42b2-8a8d-9d00c668d68a" class="numbered-list" start="3"><li><strong>Governança:</strong> A adoção de tecnologias avançadas para o monitoramento da saúde dos funcionários demonstra um compromisso com a ética e a responsabilidade, o que pode melhorar a reputação da empresa e a confiança dos stakeholders.</li></ol><p id="07f1ed63-a71d-426c-b1ac-de4087c991b7" class="">Em resumo, a adoção do nosso sistema de monitoramento de saúde dos funcionários pode trazer benefícios financeiros significativos e melhorar as métricas ESG das empresas, alinhando-se com a tendência crescente de responsabilidade social corporativa e sustentabilidade.</p><p id="65fcfddb-1f49-44bf-b3f9-d0905e9a06b6" class="">
+</p><p id="22546107-b828-4aca-a510-5137d191c0ef" class=""><strong>Conclusão:</strong></p><p id="68c62b27-ff68-4962-ad3f-2b887e442d49" class="">Em suma, nosso sistema de monitoramento de saúde de funcionários, usando smartwatches para alimentar modelos de machine learning visando a prevenção de acidentes, representa uma solução inovadora que aborda a necessidade crítica de gerenciamento proativo da saúde no local de trabalho.</p><p id="74955f6d-05e1-47af-9d9e-bc2c60cfa7a7" class="">Ao aproveitar os avanços mais recentes em tecnologia de Aprendizado de Máquina e Inteligência Artificial, oferecemos às empresas uma plataforma abrangente para monitorar, analisar e otimizar a saúde dos funcionários em tempo real. Juntos, vamos abraçar a inovação e capacitar as organizações a priorizarem o bem-estar de seu ativo mais valioso: seus funcionários</p><p id="261f5e50-6726-4f65-808a-72e67fd368d8" class="">
+</p><p id="3ea55373-e28d-4277-ae82-add36adabfe5" class="">Nosso comprometimento com ESG (Ambiental, Social e Governança) é fundamental para nossa abordagem empresarial. Estamos comprometidos em utilizar mão de obra local misturada com experiência para alcançar nossos objetivos e ter um impacto positivo na cidade em que operamos.</p><p id="6a891b17-3ba3-4c74-ba28-25de240fb23b" class="">Ao priorizar a contratação de trabalhadores locais, estamos investindo diretamente na comunidade, gerando empregos e fortalecendo a economia local. Além disso, ao combinar essa mão de obra com profissionais experientes, estamos garantindo que nossos projetos sejam executados com excelência e eficiência.</p><p id="c5ed920b-38dc-4d7e-96bb-521b56cc902a" class="">Ao adotar essa abordagem, não apenas estamos cumprindo nossas responsabilidades sociais, mas também estamos criando um ambiente de trabalho diversificado e inclusivo, que valoriza e respeita as contribuições de todos os membros da equipe. Isso não só melhora a qualidade de vida dos indivíduos envolvidos, mas também contribui para um ambiente de trabalho mais produtivo e positivo.</p><p id="76079fe9-4cb8-41d0-bed5-f6fe6fb90329" class="">Além disso, ao investir em mão de obra local, estamos reduzindo nossa pegada de carbono, pois estamos minimizando a necessidade de deslocamento de trabalhadores de longa distância. Isso está alinhado com nossos objetivos ambientais de reduzir o impacto negativo de nossas operações no meio ambiente.</p><p id="2dbef62c-7f01-4e7b-8f03-bc06fa7ee7ad" class="">Em resumo, nosso comprometimento com ESG não é apenas uma parte integrante de nossa estratégia de negócios, mas também uma expressão de nossos valores fundamentais. Estamos comprometidos em operar de forma ética, responsável e sustentável, buscando sempre causar um impacto positivo nas comunidades em que vivemos e trabalhamos.</p><p id="147aaf20-9d64-4b9a-b2d9-0235746b5e31" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
